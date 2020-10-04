@@ -19,7 +19,7 @@ class m201003_163817_create_pages_table extends Migration
             'lft' => $this->integer()->notNull(),
             'rgt' => $this->integer()->notNull(),
             'parent' => $this->integer()->defaultValue(0),
-            'status' => $this->smallInteger()->notNull()->defaultValue(1),
+            'status' => $this->tinyInteger(1)->defaultValue(1),
             'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'module' => $this->string()->notNull(),
             'image' => $this->string()->null(),

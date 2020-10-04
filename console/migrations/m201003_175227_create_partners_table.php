@@ -17,7 +17,7 @@ class m201003_175227_create_partners_table extends Migration
             'name' => $this->string()->notNull(),
             'image' => $this->string(),
             'sort' => $this->integer()->notNull(),
-            'status' => $this->tinyInteger(1)->notNull(),
+            'status' => $this->tinyInteger(1)->defaultValue(1),
             'user_id' => $this->tinyInteger(4)
         ]);
 
@@ -26,6 +26,7 @@ class m201003_175227_create_partners_table extends Migration
             'model_id' => $this->integer()->notNull(),
             'language' => $this->string(16)->notNull(),
             'title' => $this->string()->null(),
+            'subtitle' => $this->string()->null(),
             'description' => $this->text()->null(),
             'link' => $this->string()->null(),
             'meta_json' => $this->text()->null()

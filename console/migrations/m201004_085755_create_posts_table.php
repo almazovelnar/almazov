@@ -19,7 +19,7 @@ class m201004_085755_create_posts_table extends Migration
             'lft' => $this->integer()->notNull(),
             'rgt' => $this->integer()->notNull(),
             'parent' => $this->integer()->defaultValue(0),
-            'status' => $this->smallInteger()->notNull()->defaultValue(1),
+            'status' => $this->tinyInteger(1)->defaultValue(1),
             'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'image' => $this->string()->null(),
             'user_id' => $this->tinyInteger(4)
@@ -45,6 +45,10 @@ class m201004_085755_create_posts_table extends Migration
             'images' => $this->text()->null(),
             'video' => $this->string()->null(),
             'author' => $this->string()->null(),
+            'status' => $this->tinyInteger(1)->defaultValue(1),
+            'sort' => $this->integer()->notNull(),
+            'see' => $this->integer()->defaultValue(0),
+            'is_selected' => $this->tinyInteger(1)->defaultValue(0),
             'user_id' => $this->tinyInteger(4)
         ]);
 
@@ -61,10 +65,22 @@ class m201004_085755_create_posts_table extends Migration
             'meta_json' => $this->text()->null()
         ]);
 
+        $this->createTable('{{%post_tags}}', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string()->notNull(),
+            'language' => $this->string(16)->notNull(),
+            'status' => $this->tinyInteger(1)->defaultValue(1),
+            'count' => $this->integer()->defaultValue(0)
+        ]);
 
         $this->createTable('{{%post_category}}', [
             'category_id' => $this->integer()->notNull(),
             'post_id' => $this->integer()->notNull()
+        ]);
+
+        $this->createTable('{{%post_tag}}', [
+            'post_id' => $this->integer()->notNull(),
+            'tag_id' => $this->integer()->notNull()
         ]);
 
         $this->addForeignKey('fk_post_category_lang',     'post_category_lang',    'model_id', 'post_categories', 'id', 'CASCADE');
@@ -74,6 +90,9 @@ class m201004_085755_create_posts_table extends Migration
         $this->addForeignKey('fk_post_category_category',     'post_category',    'category_id', 'post_categories', 'id', 'CASCADE');
         $this->addForeignKey('fk_post_category_post',     'post_category',    'post_id', 'posts', 'id', 'CASCADE');
 
+        $this->addPrimaryKey('pk_post_tag', 'post_tag', 'post_id, tag_id');
+        $this->addForeignKey('fk_post_tag_post',     'post_tag',    'post_id', 'posts', 'id', 'CASCADE');
+        $this->addForeignKey('fk_post_tag_tag',     'post_tag',    'tag_id', 'post_tags', 'id', 'CASCADE');
     }
 
     /**
@@ -87,9 +106,15 @@ class m201004_085755_create_posts_table extends Migration
         $this->dropForeignKey('fk_post_category_category', 'post_category');
         $this->dropForeignKey('fk_post_category_post', 'post_category');
 
+        $this->dropForeignKey('fk_post_tag_post', 'post_tag');
+        $this->dropForeignKey('fk_post_tag_tag', 'post_tag');
+
+        $this->dropTable('{{%post_category}}');
+        $this->dropTable('{{%post_tag}}');
         $this->dropTable('{{%post_categories}}');
-        $this->dropTable('{{%post_category_lang}}');
         $this->dropTable('{{%posts}}');
+        $this->dropTable('{{%post_category_lang}}');
         $this->dropTable('{{%post_lang}}');
+        $this->dropTable('{{%post_tags}}');
     }
 }
