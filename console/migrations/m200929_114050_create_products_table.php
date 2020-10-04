@@ -21,7 +21,8 @@ class m200929_114050_create_products_table extends Migration
             'parent' => $this->integer()->defaultValue(0),
             'status' => $this->smallInteger()->notNull()->defaultValue(1),
             'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
-            'image' => $this->string()->null()
+            'image' => $this->string()->null(),
+            'user_id' => $this->tinyInteger(4)
         ]);
 
         $this->createTable('{{%product_category_lang}}', [
@@ -45,7 +46,8 @@ class m200929_114050_create_products_table extends Migration
             'parent' => $this->integer()->defaultValue(0),
             'status' => $this->smallInteger()->notNull()->defaultValue(1),
             'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
-            'image' => $this->string()->null()
+            'image' => $this->string()->null(),
+            'user_id' => $this->tinyInteger(4)
         ]);
 
         $this->createTable('{{%product_brand_lang}}', [
@@ -70,7 +72,8 @@ class m200929_114050_create_products_table extends Migration
             'quantity' => $this->integer()->defaultValue(1),
             'see' => $this->integer()->defaultValue(0),
             'sell' => $this->integer()->defaultValue(0),
-            'status' => $this->smallInteger()->notNull()->defaultValue(1)
+            'status' => $this->smallInteger()->notNull()->defaultValue(1),
+            'user_id' => $this->tinyInteger(4)
         ]);
 
         $this->createTable('{{%product_lang}}', [

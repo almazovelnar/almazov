@@ -18,6 +18,7 @@ class m201003_174616_create_currencies_table extends Migration
             'code' => $this->string(16),
             'icon' => $this->string(),
             'default' => $this->tinyInteger(1)->defaultValue(0),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'value' => $this->double()
         ]);
     }

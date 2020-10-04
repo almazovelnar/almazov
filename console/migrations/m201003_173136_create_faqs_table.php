@@ -17,7 +17,9 @@ class m201003_173136_create_faqs_table extends Migration
             'question' => $this->string(),
             'answer' => $this->string(),
             'language' => $this->string(16)->notNull(),
-            'status' => $this->tinyInteger(1)->notNull()
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'status' => $this->tinyInteger(1)->notNull(),
+            'user_id' => $this->tinyInteger(4)
         ]);
     }
 
