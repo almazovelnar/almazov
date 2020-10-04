@@ -14,6 +14,7 @@ class m201003_134540_create_locations_table extends Migration
     {
         $this->createTable('{{%locations}}', [
             'id' => $this->primaryKey(),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'sort' => $this->integer()->notNull(),
             'longitude' => $this->string()->null(),
             'latitude' => $this->string()->null(),
@@ -21,7 +22,8 @@ class m201003_134540_create_locations_table extends Migration
             'emails' => $this->string()->null(),
             'slug' => $this->string()->notNull(),
             'fax' => $this->string()->null(),
-            'status' => $this->tinyInteger(1)->notNull()
+            'status' => $this->tinyInteger(1)->notNull(),
+            'user_id' => $this->tinyInteger(4)
         ]);
 
         $this->createTable('{{%location_lang}}', [

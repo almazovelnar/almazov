@@ -17,7 +17,8 @@ class m201003_175227_create_partners_table extends Migration
             'name' => $this->string()->notNull(),
             'image' => $this->string(),
             'sort' => $this->integer()->notNull(),
-            'status' => $this->tinyInteger(1)->notNull()
+            'status' => $this->tinyInteger(1)->notNull(),
+            'user_id' => $this->tinyInteger(4)
         ]);
 
         $this->createTable('{{%partner_lang}}', [

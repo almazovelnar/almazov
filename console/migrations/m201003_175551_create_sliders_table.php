@@ -17,7 +17,8 @@ class m201003_175551_create_sliders_table extends Migration
             'name' => $this->string(),
             'image' => $this->string(),
             'sort' => $this->integer()->notNull(),
-            'status' => $this->tinyInteger(1)->notNull()
+            'status' => $this->tinyInteger(1)->notNull(),
+            'user_id' => $this->tinyInteger(4)
         ]);
 
         $this->createTable('{{%slider_lang}}', [

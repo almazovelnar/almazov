@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%services}}`.
+ * Handles the creation of table `{{%posts}}`.
  */
-class m201003_175616_create_services_table extends Migration
+class m201004_085755_create_posts_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%service_categories}}', [
+        $this->createTable('{{%post_categories}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'depth' => $this->integer()->defaultValue(0),
@@ -25,7 +25,7 @@ class m201003_175616_create_services_table extends Migration
             'user_id' => $this->tinyInteger(4)
         ]);
 
-        $this->createTable('{{%service_category_lang}}', [
+        $this->createTable('{{%post_category_lang}}', [
             'id' => $this->primaryKey(),
             'model_id' => $this->integer()->notNull(),
             'language' => $this->string(16)->notNull(),
@@ -37,7 +37,7 @@ class m201003_175616_create_services_table extends Migration
             'meta_json' => $this->text()->null()
         ]);
 
-        $this->createTable('{{%services}}', [
+        $this->createTable('{{%posts}}', [
             'id' => $this->primaryKey(),
             'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'type' => $this->string()->null(),
@@ -48,7 +48,7 @@ class m201003_175616_create_services_table extends Migration
             'user_id' => $this->tinyInteger(4)
         ]);
 
-        $this->createTable('{{%service_lang}}', [
+        $this->createTable('{{%post_lang}}', [
             'id' => $this->primaryKey(),
             'model_id' => $this->integer()->notNull(),
             'language' => $this->string(16)->notNull(),
@@ -62,17 +62,17 @@ class m201003_175616_create_services_table extends Migration
         ]);
 
 
-        $this->createTable('{{%service_category}}', [
+        $this->createTable('{{%post_category}}', [
             'category_id' => $this->integer()->notNull(),
-            'service_id' => $this->integer()->notNull()
+            'post_id' => $this->integer()->notNull()
         ]);
 
-        $this->addForeignKey('fk_service_category_lang',     'service_category_lang',    'model_id', 'service_categories', 'id', 'CASCADE');
-        $this->addForeignKey('fk_service_lang',     'service_lang',    'model_id', 'services', 'id', 'CASCADE');
+        $this->addForeignKey('fk_post_category_lang',     'post_category_lang',    'model_id', 'post_categories', 'id', 'CASCADE');
+        $this->addForeignKey('fk_post_lang',     'post_lang',    'model_id', 'posts', 'id', 'CASCADE');
 
-        $this->addPrimaryKey('pk_service_category', 'service_category', 'category_id, service_id');
-        $this->addForeignKey('fk_service_category_category',     'service_category',    'category_id', 'service_categories', 'id', 'CASCADE');
-        $this->addForeignKey('fk_service_category_service',     'service_category',    'service_id', 'services', 'id', 'CASCADE');
+        $this->addPrimaryKey('pk_post_category', 'post_category', 'category_id, post_id');
+        $this->addForeignKey('fk_post_category_category',     'post_category',    'category_id', 'post_categories', 'id', 'CASCADE');
+        $this->addForeignKey('fk_post_category_post',     'post_category',    'post_id', 'posts', 'id', 'CASCADE');
 
     }
 
@@ -81,15 +81,15 @@ class m201003_175616_create_services_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('fk_service_category_lang', 'service_category_lang');
-        $this->dropForeignKey('fk_service_lang', 'service_lang');
+        $this->dropForeignKey('fk_post_category_lang', 'post_category_lang');
+        $this->dropForeignKey('fk_post_lang', 'post_lang');
 
-        $this->dropForeignKey('fk_service_category_category', 'service_category');
-        $this->dropForeignKey('fk_service_category_service', 'service_category');
+        $this->dropForeignKey('fk_post_category_category', 'post_category');
+        $this->dropForeignKey('fk_post_category_post', 'post_category');
 
-        $this->dropTable('{{%service_categories}}');
-        $this->dropTable('{{%service_category_lang}}');
-        $this->dropTable('{{%services}}');
-        $this->dropTable('{{%service_lang}}');
+        $this->dropTable('{{%post_categories}}');
+        $this->dropTable('{{%post_category_lang}}');
+        $this->dropTable('{{%posts}}');
+        $this->dropTable('{{%post_lang}}');
     }
 }

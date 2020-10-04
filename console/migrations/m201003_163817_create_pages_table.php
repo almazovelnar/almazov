@@ -23,7 +23,8 @@ class m201003_163817_create_pages_table extends Migration
             'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'module' => $this->string()->notNull(),
             'image' => $this->string()->null(),
-            'images' => $this->text()->null()
+            'images' => $this->text()->null(),
+            'user_id' => $this->tinyInteger(4)
         ]);
 
         $this->createTable('{{%page_lang}}', [

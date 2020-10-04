@@ -19,7 +19,9 @@ class m201003_173015_create_languages_table extends Migration
             'image' => $this->string()->null(),
             'sort' => $this->smallInteger(),
             'default' => $this->tinyInteger(1)->defaultValue(0),
-            'code' => $this->string(16)->null()
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'code' => $this->string(16)->null(),
+            'user_id' => $this->tinyInteger(4)
         ]);
     }
 
