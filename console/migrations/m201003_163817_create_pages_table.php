@@ -49,6 +49,7 @@ class m201003_163817_create_pages_table extends Migration
     public function safeDown()
     {
         $this->dropForeignKey('fk_page_lang', 'page_lang');
+
         $this->dropTable('{{%page_lang}}');
         $this->dropTable('{{%pages}}');
     }

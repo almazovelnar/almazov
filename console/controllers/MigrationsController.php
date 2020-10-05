@@ -13,22 +13,31 @@ use yii\db\Migration;
 class MigrationsController extends Controller
 {
     private $migration;
+    private $namespace;
 
     public function __construct($id, $module, Migration $migration, $config = [])
     {
         parent::__construct($id, $module, $config);
 
         $this->migration = $migration;
+        $this->namespace = '';
     }
 
-    public function actionInit(array $migrations, string $type)
+    /**
+     *  @param array $migrations Migration Classes
+     * @param string $method Migration class method
+     */
+    public function actionInit(array $migrations, string $method)
     {
-        $path = Yii::getAlias('core\migrations\\');
-
         foreach ($migrations as $migration) {
-            $migration = $path . ucfirst($migration);
+            $migration = $this->namespace . ucfirst($migration);
             $object = new $migration($this->migration);
-            call_user_func([$object, $type]);
+            call_user_func([$object, $method]);
         }
+    }
+
+    public function actionEcommerce()
+    {
+        
     }
 }
