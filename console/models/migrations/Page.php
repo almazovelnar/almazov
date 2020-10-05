@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%pages}}`.
+ * Class Page
+ * @package console\models\migrations
  */
-class m201003_163817_create_pages_table extends Migration
+class Page extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%pages}}', [
             'id' => $this->primaryKey(),
@@ -43,10 +44,7 @@ class m201003_163817_create_pages_table extends Migration
         $this->addForeignKey('fk_page_lang',     'page_lang',    'model_id', 'pages', 'id', 'CASCADE');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropForeignKey('fk_page_lang', 'page_lang');
 

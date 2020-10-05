@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%main_info}}`.
+ * Class MainInfo
+ * @package console\models\migrations
  */
-class m201003_134825_create_main_info_table extends Migration
+class MainInfo extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%main_info}}', [
             'id' => $this->primaryKey(),
@@ -38,10 +39,7 @@ class m201003_134825_create_main_info_table extends Migration
         $this->addForeignKey('fk_main_info_lang',     'main_info_lang',    'model_id', 'main_info', 'id', 'CASCADE');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropForeignKey('fk_main_info_lang', 'main_info_lang');
 

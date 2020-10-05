@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%locations}}`.
+ * Class Location
+ * @package console\models\migrations
  */
-class m201003_134540_create_locations_table extends Migration
+class Location extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%locations}}', [
             'id' => $this->primaryKey(),
@@ -37,10 +38,7 @@ class m201003_134540_create_locations_table extends Migration
         $this->addForeignKey('fk_location_lang',     'location_lang',    'model_id', 'locations', 'id', 'CASCADE');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropForeignKey('fk_location_lang', 'location_lang');
 

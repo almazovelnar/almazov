@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%customers}}`.
+ * Class Customer
+ * @package console\models\migrations
  */
-class m201003_134523_create_customers_table extends Migration
+class Customer extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%customers}}', [
             'id' => $this->primaryKey(),
@@ -32,10 +33,7 @@ class m201003_134523_create_customers_table extends Migration
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('{{%customers}}');
     }

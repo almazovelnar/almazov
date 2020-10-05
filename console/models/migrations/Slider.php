@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%sliders}}`.
+ * Class Slider
+ * @package console\models\migrations
  */
-class m201003_175551_create_sliders_table extends Migration
+class Slider extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%sliders}}', [
             'id' => $this->primaryKey(),
@@ -36,10 +37,7 @@ class m201003_175551_create_sliders_table extends Migration
         $this->addForeignKey('fk_slider_lang',     'slider_lang',    'model_id', 'sliders', 'id', 'CASCADE');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropForeignKey('fk_slider_lang', 'slider_lang');
 

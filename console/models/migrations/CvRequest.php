@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%cv_requests}}`.
+ * Class CvRequest
+ * @package console\models\migrations
  */
-class m201003_175516_create_cv_requests_table extends Migration
+class CvRequest extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%cv_requests}}', [
             'id' => $this->primaryKey(),
@@ -32,10 +33,7 @@ class m201003_175516_create_cv_requests_table extends Migration
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('{{%cv_requests}}');
     }

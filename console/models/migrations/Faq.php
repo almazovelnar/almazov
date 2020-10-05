@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%faqs}}`.
+ * Class Faq
+ * @package console\models\migrations
  */
-class m201003_173136_create_faqs_table extends Migration
+class Faq extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%faqs}}', [
             'id' => $this->primaryKey(),
@@ -23,10 +24,7 @@ class m201003_173136_create_faqs_table extends Migration
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('{{%faqs}}');
     }
