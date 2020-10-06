@@ -19,7 +19,7 @@ class m201003_175616_create_services_table extends Migration
             'lft' => $this->integer()->notNull(),
             'rgt' => $this->integer()->notNull(),
             'parent' => $this->integer()->defaultValue(0),
-            'status' => $this->smallInteger()->notNull()->defaultValue(1),
+            'status' => $this->tinyInteger(1)->defaultValue(1),
             'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'image' => $this->string()->null(),
             'user_id' => $this->tinyInteger(4)
@@ -45,6 +45,10 @@ class m201003_175616_create_services_table extends Migration
             'images' => $this->text()->null(),
             'video' => $this->string()->null(),
             'author' => $this->string()->null(),
+            'status' => $this->tinyInteger(1)->defaultValue(1),
+            'sort' => $this->integer()->notNull(),
+            'see' => $this->integer()->defaultValue(0),
+            'is_selected' => $this->tinyInteger(1)->defaultValue(0),
             'user_id' => $this->tinyInteger(4)
         ]);
 
@@ -73,7 +77,6 @@ class m201003_175616_create_services_table extends Migration
         $this->addPrimaryKey('pk_service_category', 'service_category', 'category_id, service_id');
         $this->addForeignKey('fk_service_category_category',     'service_category',    'category_id', 'service_categories', 'id', 'CASCADE');
         $this->addForeignKey('fk_service_category_service',     'service_category',    'service_id', 'services', 'id', 'CASCADE');
-
     }
 
     /**
@@ -91,5 +94,6 @@ class m201003_175616_create_services_table extends Migration
         $this->dropTable('{{%service_category_lang}}');
         $this->dropTable('{{%services}}');
         $this->dropTable('{{%service_lang}}');
+        $this->dropTable('{{%service_category}}');
     }
 }

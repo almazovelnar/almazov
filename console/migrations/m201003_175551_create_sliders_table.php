@@ -17,7 +17,7 @@ class m201003_175551_create_sliders_table extends Migration
             'name' => $this->string(),
             'image' => $this->string(),
             'sort' => $this->integer()->notNull(),
-            'status' => $this->tinyInteger(1)->notNull(),
+            'status' => $this->tinyInteger(1)->defaultValue(1),
             'user_id' => $this->tinyInteger(4)
         ]);
 
@@ -32,6 +32,8 @@ class m201003_175551_create_sliders_table extends Migration
             'link' => $this->string()->null(),
             'lang_image' => $this->string()
         ]);
+
+        $this->addForeignKey('fk_slider_lang',     'slider_lang',    'model_id', 'sliders', 'id', 'CASCADE');
     }
 
     /**
@@ -39,6 +41,9 @@ class m201003_175551_create_sliders_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('fk_slider_lang', 'slider_lang');
+
         $this->dropTable('{{%sliders}}');
+        $this->dropTable('{{%slider_lang}}');
     }
 }
