@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%posts}}`.
+ * Class Post
+ * @package console\models\migrations
  */
-class m201004_085755_create_posts_table extends Migration
+class Post extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%post_categories}}', [
             'id' => $this->primaryKey(),
@@ -95,10 +96,7 @@ class m201004_085755_create_posts_table extends Migration
         $this->addForeignKey('fk_post_tag_tag',     'post_tag',    'tag_id', 'post_tags', 'id', 'CASCADE');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropForeignKey('fk_post_category_lang', 'post_category_lang');
         $this->dropForeignKey('fk_post_lang', 'post_lang');

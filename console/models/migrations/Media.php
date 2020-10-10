@@ -1,18 +1,19 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%services}}`.
+ * Class Media
+ * @package console\models\migrations
  */
-class m201003_175616_create_services_table extends Migration
+class Media extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
-        $this->createTable('{{%service_categories}}', [
+        $this->createTable('{{%media_categories}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'depth' => $this->integer()->defaultValue(0),
@@ -25,7 +26,7 @@ class m201003_175616_create_services_table extends Migration
             'user_id' => $this->tinyInteger(4)
         ]);
 
-        $this->createTable('{{%service_category_lang}}', [
+        $this->createTable('{{%media_category_lang}}', [
             'id' => $this->primaryKey(),
             'model_id' => $this->integer()->notNull(),
             'language' => $this->string(16)->notNull(),
@@ -37,7 +38,7 @@ class m201003_175616_create_services_table extends Migration
             'meta_json' => $this->text()->null()
         ]);
 
-        $this->createTable('{{%services}}', [
+        $this->createTable('{{%medias}}', [
             'id' => $this->primaryKey(),
             'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'type' => $this->string()->null(),
@@ -52,7 +53,7 @@ class m201003_175616_create_services_table extends Migration
             'user_id' => $this->tinyInteger(4)
         ]);
 
-        $this->createTable('{{%service_lang}}', [
+        $this->createTable('{{%media_lang}}', [
             'id' => $this->primaryKey(),
             'model_id' => $this->integer()->notNull(),
             'language' => $this->string(16)->notNull(),
@@ -66,34 +67,31 @@ class m201003_175616_create_services_table extends Migration
         ]);
 
 
-        $this->createTable('{{%service_category}}', [
+        $this->createTable('{{%media_category}}', [
             'category_id' => $this->integer()->notNull(),
-            'service_id' => $this->integer()->notNull()
+            'media_id' => $this->integer()->notNull()
         ]);
 
-        $this->addForeignKey('fk_service_category_lang',     'service_category_lang',    'model_id', 'service_categories', 'id', 'CASCADE');
-        $this->addForeignKey('fk_service_lang',     'service_lang',    'model_id', 'services', 'id', 'CASCADE');
+        $this->addForeignKey('fk_media_category_lang',     'media_category_lang',    'model_id', 'media_categories', 'id', 'CASCADE');
+        $this->addForeignKey('fk_media_lang',     'media_lang',    'model_id', 'medias', 'id', 'CASCADE');
 
-        $this->addPrimaryKey('pk_service_category', 'service_category', 'category_id, service_id');
-        $this->addForeignKey('fk_service_category_category',     'service_category',    'category_id', 'service_categories', 'id', 'CASCADE');
-        $this->addForeignKey('fk_service_category_service',     'service_category',    'service_id', 'services', 'id', 'CASCADE');
+        $this->addPrimaryKey('pk_media_category', 'media_category', 'category_id, media_id');
+        $this->addForeignKey('fk_media_category_category',     'media_category',    'category_id', 'media_categories', 'id', 'CASCADE');
+        $this->addForeignKey('fk_media_category_media',     'media_category',    'media_id', 'medias', 'id', 'CASCADE');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
-        $this->dropForeignKey('fk_service_category_lang', 'service_category_lang');
-        $this->dropForeignKey('fk_service_lang', 'service_lang');
+        $this->dropForeignKey('fk_media_category_lang', 'media_category_lang');
+        $this->dropForeignKey('fk_media_lang', 'media_lang');
 
-        $this->dropForeignKey('fk_service_category_category', 'service_category');
-        $this->dropForeignKey('fk_service_category_service', 'service_category');
+        $this->dropForeignKey('fk_media_category_category', 'media_category');
+        $this->dropForeignKey('fk_media_category_media', 'media_category');
 
-        $this->dropTable('{{%service_categories}}');
-        $this->dropTable('{{%service_category_lang}}');
-        $this->dropTable('{{%services}}');
-        $this->dropTable('{{%service_lang}}');
-        $this->dropTable('{{%service_category}}');
+        $this->dropTable('{{%media_categories}}');
+        $this->dropTable('{{%media_category_lang}}');
+        $this->dropTable('{{%medias}}');
+        $this->dropTable('{{%media_lang}}');
+        $this->dropTable('{{%media_category}}');
     }
 }

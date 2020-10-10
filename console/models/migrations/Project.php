@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%projects}}`.
+ * Class Project
+ * @package console\models\migrations
  */
-class m201003_175608_create_projects_table extends Migration
+class Project extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%project_categories}}', [
             'id' => $this->primaryKey(),
@@ -79,10 +80,7 @@ class m201003_175608_create_projects_table extends Migration
         $this->addForeignKey('fk_project_category_project',     'project_category',    'project_id', 'projects', 'id', 'CASCADE');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropForeignKey('fk_project_category_lang', 'project_category_lang');
         $this->dropForeignKey('fk_project_lang', 'project_lang');

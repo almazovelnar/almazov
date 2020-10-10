@@ -3,8 +3,9 @@
 namespace console\controllers;
 
 use Yii;
+use Exception;
 use yii\console\Controller;
-use yii\db\Migration;
+use console\services\MigrationService;
 
 /**
  * Class MigrationsController
@@ -12,23 +13,45 @@ use yii\db\Migration;
  */
 class MigrationsController extends Controller
 {
-    private $migration;
+    private $migrationService;
 
-    public function __construct($id, $module, Migration $migration, $config = [])
+    public function __construct($id, $module, MigrationService $migrationService, $config = [])
     {
         parent::__construct($id, $module, $config);
 
-        $this->migration = $migration;
+        $this->migrationService = $migrationService;
     }
 
-    public function actionInit(array $migrations, string $type)
+    /**
+     * @param array $migrations Migration Classes
+     * @param string $method Migration class method
+     */
+    public function actionInit(array $migrations, string $method = 'up')
     {
-        $path = Yii::getAlias('core\migrations\\');
+        try {
+            foreach ($migrations as $migration) {
+                $this->migrationService->create($migration, $method);
+            }
+        } catch (Exception $e) {
+            Yii::$app->errorHandler->logException($e);
+            echo PHP_EOL . $e->getMessage();
+        }
+    }
 
-        foreach ($migrations as $migration) {
-            $migration = $path . ucfirst($migration);
-            $object = new $migration($this->migration);
-            call_user_func([$object, $type]);
+    /**
+     * Base migrations
+     */
+    public function actionBase()
+    {
+        $migrations = ['mainInfo', 'page', 'language', 'translate', 'config', 'slider', 'request'];
+
+        try {
+            foreach ($migrations as $migration) {
+                $this->migrationService->create($migration);
+            }
+        } catch (Exception $e) {
+            Yii::$app->errorHandler->logException($e);
+            echo PHP_EOL . $e->getMessage();
         }
     }
 }

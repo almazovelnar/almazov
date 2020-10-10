@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%translates}}`.
+ * Class Translate
+ * @package console\models\migrations
  */
-class m201003_173042_create_translates_table extends Migration
+class Translate extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%translates}}', [
             'id' => $this->primaryKey(),
@@ -20,10 +21,7 @@ class m201003_173042_create_translates_table extends Migration
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('{{%translates}}');
     }

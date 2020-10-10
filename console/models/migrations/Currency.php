@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%currencies}}`.
+ * Class Currency
+ * @package console\models\migrations
  */
-class m201003_174616_create_currencies_table extends Migration
+class Currency extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%currencies}}', [
             'id' => $this->primaryKey(),
@@ -23,10 +24,7 @@ class m201003_174616_create_currencies_table extends Migration
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('{{%currencies}}');
     }

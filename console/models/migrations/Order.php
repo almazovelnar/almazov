@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%orders}}`.
+ * Class Order
+ * @package console\models\migrations
  */
-class m200929_183246_create_orders_table extends Migration
+class Order extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%orders}}', [
             'id' => $this->primaryKey(),
@@ -69,10 +70,7 @@ class m200929_183246_create_orders_table extends Migration
         $this->addForeignKey('fk_order_customer',     'order_customer',    'order_id', 'orders', 'id', 'CASCADE');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropForeignKey('fk_order_item', 'order_item');
         $this->dropForeignKey('fk_order_payment', 'order_payment');

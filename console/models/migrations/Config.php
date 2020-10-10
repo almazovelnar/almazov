@@ -1,16 +1,17 @@
 <?php
 
+namespace console\models\migrations;
+
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%configs}}`.
+ * Class Config
+ * @package console\models\migrations
  */
-class m201003_134707_create_configs_table extends Migration
+class Config extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%configs}}', [
             'id' => $this->primaryKey(),
@@ -20,10 +21,7 @@ class m201003_134707_create_configs_table extends Migration
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('{{%configs}}');
     }

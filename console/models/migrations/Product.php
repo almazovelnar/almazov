@@ -1,16 +1,16 @@
 <?php
 
+namespace console\models\migrations;
+
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%products}}`.
+ * Class Product
+ * @package console\models\migrations
  */
-class m200929_114050_create_products_table extends Migration
+class Product extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%product_categories}}', [
             'id' => $this->primaryKey(),
@@ -111,10 +111,7 @@ class m200929_114050_create_products_table extends Migration
         $this->addForeignKey('fk_product_brand_product',     'product_brand',    'product_id', 'products', 'id', 'CASCADE');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
         $this->dropForeignKey('fk_category_lang', 'product_category_lang');
         $this->dropForeignKey('fk_brand_lang', 'product_brand_lang');
