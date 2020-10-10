@@ -97,6 +97,7 @@ class Product extends Migration
             'brand_id' => $this->integer()->notNull(),
             'product_id' => $this->integer()->notNull()
         ]);
+        
 
         $this->addForeignKey('fk_category_lang',     'product_category_lang',    'model_id', 'product_categories', 'id', 'CASCADE');
         $this->addForeignKey('fk_brand_lang',     'product_brand_lang',    'model_id', 'product_brands', 'id', 'CASCADE');
