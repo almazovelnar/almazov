@@ -19,9 +19,10 @@ class Language extends Migration
             'alias' => $this->string(16)->notNull(),
             'image' => $this->string()->null(),
             'sort' => $this->smallInteger(),
-            'default' => $this->tinyInteger(1)->defaultValue(0),
+            'is_default' => $this->tinyInteger(1)->defaultValue(0),
             'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'code' => $this->string(16)->null(),
+            'status' => $this->tinyInteger(1)->defaultValue(1),
             'user_id' => $this->tinyInteger(4)
         ]);
     }
