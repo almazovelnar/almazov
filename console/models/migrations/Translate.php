@@ -16,6 +16,7 @@ class Translate extends Migration
         $this->createTable('{{%translates}}', [
             'id' => $this->primaryKey(),
             'code' => $this->string()->notNull(),
+            'language' => $this->string(16)->notNull(),
             'translate' => $this->string()->null(),
             'status' => $this->tinyInteger(1)->notNull()
         ]);

@@ -1,5 +1,8 @@
 <?php
 return [
+    'bootstrap' => [
+        'class' => 'common\bootstrap\SetUp'
+    ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',

@@ -1,6 +1,6 @@
 <?php
 
-namespace core\entities;
+namespace core\entities\Language;
 
 
 use yii\db\ActiveRecord;
@@ -17,9 +17,8 @@ use yii\db\ActiveRecord;
  * @property bool $status
  * @property integer $user_id
  *
- *
  * Class Language
- * @package core\entities
+ * @package core\entities\Language
  */
 class Language extends ActiveRecord
 {
